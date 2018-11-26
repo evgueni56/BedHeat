@@ -71,7 +71,7 @@ bool relay_status = false, OnSwitch = false, wifi_cause = false;
 int WindowOpen = 0;
 bool EmergencyMode = false; // No Blynk connection or Button override
 bool led_state = false; // False to lit the led
-float req_temp = 21.0, low_temp = 16.0; // Default values if no Blynk connection
+float req_temp = 21.0, low_temp = 15.0; // Default values if no Blynk connection
 int blynk_relay_status = 0;
 long wait_time;
 long button_timeout;
@@ -174,7 +174,7 @@ void loop()
 	}
 
 	HandleHeating(req_temp);
-	HandleHeating(low_temp);
+	//HandleHeating(low_temp);
 }
 
 void SetupTemeratureSensor()
@@ -185,10 +185,6 @@ void SetupTemeratureSensor()
 	sensors.setResolution(insideThermometer, 12);
 }
 
-BLYNK_WRITE(V10) // Temperature
-{
-	low_temp = param.asFloat();
-}
 
 BLYNK_WRITE(V11) // Temperature
 {
@@ -222,7 +218,6 @@ void SleepTFunc()
 		return;
 	}
 	// Now push the values
-	Blynk.virtualWrite(V3, devCnt); // Debug param - to see if sensor is detected
 	Blynk.virtualWrite(V0, tempC); // Current temperature
 	Blynk.virtualWrite(V1, blynk_relay_status); // ON/OFF Status
 	return;
@@ -263,28 +258,6 @@ void HandleEmergency()
 
 }
 
-//bool CheckTime(long OnTime, long OffTime)
-//{
-//	if (OnTime == OffTime)
-//		return false; // No time set for the given interval
-//
-//	this_second = elapsedSecsToday(now());
-//
-//	if (OnTime < OffTime)
-//	{
-//		if (this_second > OnTime && this_second < OffTime)
-//			return true;
-//		else
-//			return false;
-//	}
-//	else
-//	{
-//		if (this_second > OffTime && this_second < OnTime)
-//			return false;
-//		else
-//			return true;
-//	}
-//}
 
 bool HandleWindow()
 {
