@@ -57,8 +57,6 @@ char auth[] = "f483804923d644b2bde66a71272b1cf0"; // Mladoct CLOUD server
 char auth[] = "63020a5eab8540feac7e3301667233bb"; // Mladost Local server
 #endif
 
-const char t_ssdi[] = "ehome", t_pw[] = "ewgekrs61";
-
 const int Rellay = 12;
 const int Led = 13;
 
